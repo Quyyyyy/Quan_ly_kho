@@ -2,6 +2,7 @@ package com.example.quan_ly_kho.controller;
 
 import com.example.quan_ly_kho.dto.ResultResponse;
 import com.example.quan_ly_kho.dto.UserDto;
+import com.example.quan_ly_kho.dto.request.RegisterRequest;
 import com.example.quan_ly_kho.dto.request.UserRequest;
 import com.example.quan_ly_kho.service.UserService;
 import com.example.quan_ly_kho.utils.AppConstants;
@@ -50,6 +51,12 @@ public class UserController {
     @PostMapping("/{id}")
     public ResponseEntity<UserDto> activeUser(@PathVariable("id") Long userId){
         UserDto userDto = userService.activeUser(userId);
+        return ResponseEntity.ok(userDto);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserByid(@PathVariable("id") Long userId){
+        UserDto userDto = userService.getUserById(userId);
         return ResponseEntity.ok(userDto);
     }
 

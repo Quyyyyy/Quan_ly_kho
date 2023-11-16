@@ -14,6 +14,7 @@ import com.example.quan_ly_kho.repository.BranchRepository;
 import com.example.quan_ly_kho.repository.UserRepository;
 import com.example.quan_ly_kho.security.JwtTokenProvider;
 import com.example.quan_ly_kho.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private BranchRepository branchRepository;
@@ -92,8 +94,8 @@ public class UserServiceImpl implements UserService {
         if(userRepository.existsByUsername(userRequest.getUsername())){
             throw new APIException(HttpStatus.BAD_REQUEST, "Username is already exists!");
         }
-        Branch branch = branchRepository.findById(userRequest.getChiNhanh_id()).orElseThrow(
-                ()->new ResourceNotFoundException("Branch","id", userRequest.getChiNhanh_id())
+        Branch branch = branchRepository.findById(userRequest.getBranchId()).orElseThrow(
+                ()->new ResourceNotFoundException("Branch","id", userRequest.getBranchId())
         );
         User user = new User();
         user.setName(userRequest.getName());
@@ -101,8 +103,13 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         user.setPhone(userRequest.getPhone());
         user.setAddress(userRequest.getAddress());
-        user.setRole(userRequest.getRole().equals("ADMIN")? Role.ADMIN:Role.USER);
+
+        if(userRequest.getRole().equals("ADMIN")){
+            user.setRole(Role.ADMIN);
+        } else user.setRole(Role.USER);
+
         user.setBranch(branch);
+        user.setStatus(Boolean.TRUE);
         User user1 = userRepository.save(user);
         return modelMapper.map(user1,UserDto.class);
     }
@@ -112,14 +119,17 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(
                 ()->new ResourceNotFoundException("User","id", id)
         );
-        Branch branch = branchRepository.findById(userRequest.getChiNhanh_id()).orElseThrow(
-                ()->new ResourceNotFoundException("Branch","id", userRequest.getChiNhanh_id())
+        Branch branch = branchRepository.findById(userRequest.getBranchId()).orElseThrow(
+                ()->new ResourceNotFoundException("Branch","id", userRequest.getBranchId())
         );
         user.setName(userRequest.getName());
         user.setUsername(userRequest.getUsername());
         user.setAddress(userRequest.getAddress());
         user.setPhone(userRequest.getPhone());
-        user.setRole(userRequest.getRole().equals("ADMIN") ? Role.ADMIN : Role.USER);
+        if(userRequest.getRole().equals("ADMIN")){
+            user.setRole(Role.ADMIN);
+        } else user.setRole(Role.USER);
+
         user.setBranch(branch);
         User user1 = userRepository.save(user);
         return modelMapper.map(user1, UserDto.class);

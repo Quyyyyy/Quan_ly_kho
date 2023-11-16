@@ -12,7 +12,7 @@ import lombok.Setter;
 public class ImportReceiptDetailDto {
     private Long id;
     private ProductDto product;
-    private ImportReceiptDto importReceipt;
+    //private ImportReceiptDto importReceipt;
     private Long quantity;
     private Double price;
 }

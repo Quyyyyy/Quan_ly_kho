@@ -18,5 +18,6 @@ public class UserDto {
     private Date bornDate;
     private String username;
     private String address;
+    private Boolean status;
     private BranchDto branch;
 }

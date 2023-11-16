@@ -1,11 +1,14 @@
 package com.example.quan_ly_kho.controller;
 
+import com.example.quan_ly_kho.dto.ExportReceiptDto;
 import com.example.quan_ly_kho.dto.ImportReceiptDetailDto;
 import com.example.quan_ly_kho.dto.ImportReceiptDto;
+import com.example.quan_ly_kho.dto.ResultResponse;
 import com.example.quan_ly_kho.dto.request.ImportReceiptDetailRequest;
 import com.example.quan_ly_kho.dto.request.ImportReceiptRequest;
 import com.example.quan_ly_kho.security.JwtTokenProvider;
 import com.example.quan_ly_kho.service.ImportReceiptService;
+import com.example.quan_ly_kho.utils.AppConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,22 @@ import org.springframework.web.bind.annotation.*;
 public class ImportReceiptController {
     private ImportReceiptService importReceiptService;
     private JwtTokenProvider jwtTokenProvider;
+
+    @GetMapping
+    public ResultResponse getAllBranches(
+            @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
+            @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
+            @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
+            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
+    ){
+        return importReceiptService.getAllImportReceipts(pageNo,pageSize,sortBy,sortDir);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ImportReceiptDto> getBranches(@PathVariable("id") Long id){
+        ImportReceiptDto importReceiptDto = importReceiptService.getImportReceiptById(id);
+        return ResponseEntity.ok(importReceiptDto);
+    }
 
     @PostMapping
     public ResponseEntity<ImportReceiptDto> createImportReceipt(
