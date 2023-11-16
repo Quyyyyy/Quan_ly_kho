@@ -6,6 +6,7 @@ import com.example.quan_ly_kho.dto.ResultResponse;
 import java.util.List;
 
 public interface BranchService {
+    List<BranchDto> getBranches();
     ResultResponse getAllBranch(int pageNo, int pageSize, String sortBy, String sortDir);
     BranchDto createBranch(BranchDto branchDto);
     BranchDto getBranchById(Long branchId);

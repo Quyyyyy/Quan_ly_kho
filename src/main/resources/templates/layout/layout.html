@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+
+<body>
+<!-- Header Fragment -->
+<th:block th:fragment="header">
+  <title th:text="${pageTitle}">Default Title</title>
+  <!-- Các thẻ khác trong header -->
+</th:block>
+
+<!-- Nội dung trang web -->
+<div th:fragment="content">
+  <!-- Nội dung trang chính -->
+</div>
+
+<!-- Footer Fragment -->
+<th:block th:fragment="footer">
+  <!-- Các nội dung khác trong footer -->
+  <p>&copy; 2023 My Website</p>
+</th:block>
+</body>
+
+</html>

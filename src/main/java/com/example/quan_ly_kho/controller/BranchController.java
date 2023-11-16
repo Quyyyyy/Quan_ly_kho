@@ -1,6 +1,7 @@
 package com.example.quan_ly_kho.controller;
 
 import com.example.quan_ly_kho.dto.BranchDto;
+import com.example.quan_ly_kho.dto.ProductDto;
 import com.example.quan_ly_kho.dto.ResultResponse;
 import com.example.quan_ly_kho.service.BranchService;
 import com.example.quan_ly_kho.utils.AppConstants;
@@ -8,11 +9,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/admin/branch")
 public class BranchController {
     private BranchService branchService;
+
+    @GetMapping("/all")
+    public ResponseEntity<List<BranchDto>> getBranches() {
+        List<BranchDto> branchDtos = branchService.getBranches();
+        return ResponseEntity.ok(branchDtos);
+    }
 
     @GetMapping
     public ResultResponse getAllBranches(

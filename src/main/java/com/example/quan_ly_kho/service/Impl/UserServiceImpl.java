@@ -1,5 +1,6 @@
 package com.example.quan_ly_kho.service.Impl;
 
+import com.example.quan_ly_kho.dto.ResultResponse;
 import com.example.quan_ly_kho.dto.UserDto;
 import com.example.quan_ly_kho.dto.request.LoginRequest;
 import com.example.quan_ly_kho.dto.request.RegisterRequest;
@@ -15,6 +16,10 @@ import com.example.quan_ly_kho.security.JwtTokenProvider;
 import com.example.quan_ly_kho.service.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +27,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -60,7 +68,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto addUser(UserRequest userRequest) {
+    public ResultResponse getAllUser(int pageNo, int pageSize, String sortBy, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(pageNo,pageSize,sort);
+        Page<User> users = userRepository.findAll(pageable);
+        List<User> listOUser = users.getContent();
+        List<UserDto> contents = listOUser.stream()
+                .map(user -> modelMapper.map(user, UserDto.class)).collect(Collectors.toList());
+
+        ResultResponse resultResponse = new ResultResponse();
+        resultResponse.setContent(contents);
+        resultResponse.setPageNo(users.getNumber());
+        resultResponse.setPageSize(users.getSize());
+        resultResponse.setTotalElements(users.getTotalElements());
+        resultResponse.setTotalPages(users.getTotalPages());
+        resultResponse.setLast(users.isLast());
+        return resultResponse;
+    }
+
+    @Override
+    public UserDto createUser(UserRequest userRequest) {
         if(userRepository.existsByUsername(userRequest.getUsername())){
             throw new APIException(HttpStatus.BAD_REQUEST, "Username is already exists!");
         }
@@ -71,12 +99,12 @@ public class UserServiceImpl implements UserService {
         user.setName(userRequest.getName());
         user.setUsername(userRequest.getUsername());
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        user.setAddress(userRequest.getAddress());
         user.setPhone(userRequest.getPhone());
-        user.setRole(userRequest.getRole());
+        user.setAddress(userRequest.getAddress());
+        user.setRole(userRequest.getRole().equals("ADMIN")? Role.ADMIN:Role.USER);
         user.setBranch(branch);
-        UserDto userDto = modelMapper.map(userRepository.save(user),UserDto.class);
-        return userDto;
+        User user1 = userRepository.save(user);
+        return modelMapper.map(user1,UserDto.class);
     }
 
     @Override
@@ -91,28 +119,37 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userRequest.getUsername());
         user.setAddress(userRequest.getAddress());
         user.setPhone(userRequest.getPhone());
-        user.setRole(userRequest.getRole());
+        user.setRole(userRequest.getRole().equals("ADMIN") ? Role.ADMIN : Role.USER);
         user.setBranch(branch);
-        return null;
+        User user1 = userRepository.save(user);
+        return modelMapper.map(user1, UserDto.class);
     }
 
     @Override
-    public String deleteUser(Long id) {
+    public UserDto deleteUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(
                 ()->new ResourceNotFoundException("User","id", id)
         );
         user.setStatus(Boolean.FALSE);
-        userRepository.save(user);
-        return "Deleted user successfully!";
+        User user1 = userRepository.save(user);
+        return modelMapper.map(user1, UserDto.class);
     }
 
     @Override
-    public String activeUser(Long id) {
+    public UserDto activeUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(
                 ()->new ResourceNotFoundException("User","id", id)
         );
         user.setStatus(Boolean.TRUE);
-        userRepository.save(user);
-        return "Actived user successfully!";
+        User user1 = userRepository.save(user);
+        return modelMapper.map(user1, UserDto.class);
+    }
+
+    @Override
+    public UserDto getUserById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                ()->new ResourceNotFoundException("User","id", id)
+        );
+        return modelMapper.map(user, UserDto.class);
     }
 }

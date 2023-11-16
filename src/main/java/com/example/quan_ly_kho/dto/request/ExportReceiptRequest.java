@@ -11,10 +11,9 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImportReceiptRequest {
+public class ExportReceiptRequest {
     private Long id;
     private Date importDate;
     private String description;
-    private Long providerId;
-//    private List<ImportReceiptDetailRequest> list;
+    private Long customerId;
 }

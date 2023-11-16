@@ -1,4 +1,4 @@
-package com.example.quan_ly_kho.dto.request;
+package com.example.quan_ly_kho.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductRequest {
+public class ExportReceiptDetailDto {
     private Long id;
-    private String name;
+    private ProductDto product;
+    private ExportReceiptDto exportReceipt;
     private Long quantity;
-    private String description;
     private Double price;
 }

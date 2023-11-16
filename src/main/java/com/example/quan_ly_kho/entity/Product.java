@@ -20,11 +20,9 @@ public class Product {
     private String name;
     @Column(name="so_luong_ton")
     private Long quantity;
-//    @Column(name="gia")
-//    private Double price;
+    @Column(name="gia")
+    private Double price;
     @Column(name="mo_ta",columnDefinition = "NVARCHAR(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS")
     private String description;
-    @ManyToOne
-    @JoinColumn(name="ChiNhanh_ID")
-    private Branch branch;
+
 }

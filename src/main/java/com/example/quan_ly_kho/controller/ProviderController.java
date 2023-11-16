@@ -1,5 +1,6 @@
 package com.example.quan_ly_kho.controller;
 
+import com.example.quan_ly_kho.dto.ProductDto;
 import com.example.quan_ly_kho.dto.ProviderDto;
 import com.example.quan_ly_kho.dto.ResultResponse;
 import com.example.quan_ly_kho.service.ProviderService;
@@ -8,11 +9,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/admin/provider")
 public class ProviderController {
     private ProviderService providerService;
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ProviderDto>> getProviders() {
+        List<ProviderDto> providerDtos = providerService.getProviders();
+        return ResponseEntity.ok(providerDtos);
+    }
 
     @GetMapping
     public ResultResponse getAllProviders(

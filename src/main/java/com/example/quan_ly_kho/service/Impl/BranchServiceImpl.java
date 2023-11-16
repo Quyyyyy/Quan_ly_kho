@@ -24,6 +24,14 @@ public class BranchServiceImpl implements BranchService {
     private ModelMapper modelMapper;
 
     @Override
+    public List<BranchDto> getBranches() {
+        List<Branch> branches = branchRepository.findAll();
+        List<BranchDto> branchDtos = branches.stream().map(branch -> modelMapper.map(branch, BranchDto.class))
+                .collect(Collectors.toList());
+        return branchDtos;
+    }
+
+    @Override
     public ResultResponse getAllBranch(int pageNo, int pageSize, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();

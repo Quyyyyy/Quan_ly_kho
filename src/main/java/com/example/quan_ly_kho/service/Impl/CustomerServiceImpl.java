@@ -73,4 +73,12 @@ public class CustomerServiceImpl implements CustomerService {
         Customer saveCus = customerRepository.save(customer);
         return modelMapper.map(saveCus, CustomerDto.class);
     }
+
+    @Override
+    public List<CustomerDto> getCustomerss() {
+        List<Customer> customers = customerRepository.findAll();
+        List<CustomerDto> customerDtos = customers.stream().
+                map(customer -> modelMapper.map(customer, CustomerDto.class)).collect(Collectors.toList());
+        return customerDtos;
+    }
 }

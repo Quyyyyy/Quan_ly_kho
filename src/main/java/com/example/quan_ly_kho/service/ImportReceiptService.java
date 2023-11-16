@@ -7,5 +7,5 @@ import com.example.quan_ly_kho.dto.request.ImportReceiptRequest;
 
 public interface ImportReceiptService {
     ImportReceiptDto createImportReceipt(String username,ImportReceiptRequest importReceiptRequest);
-    ImportReceiptDetailDto createImportReceiptDetai(Long importReceiptId, ImportReceiptDetailRequest importReceiptDetailRequest);
+    ImportReceiptDetailDto createImportReceiptDetai(String username,Long importReceiptId, ImportReceiptDetailRequest importReceiptDetailRequest);
 }

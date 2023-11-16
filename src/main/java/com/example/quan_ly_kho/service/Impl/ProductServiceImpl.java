@@ -28,6 +28,14 @@ public class ProductServiceImpl implements ProductService {
     private ModelMapper modelMapper;
 
     @Override
+    public List<ProductDto> getProducts() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDto> productDtos = products.stream().map((product)->modelMapper.map(product, ProductDto.class))
+                .collect(Collectors.toList());
+        return productDtos;
+    }
+
+    @Override
     public ResultResponse getAllProduct(int pageNo, int pageSize, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
@@ -49,14 +57,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto createProduct(ProductRequest productRequest) {
-        Branch branch = branchRepository.findById(productRequest.getBranchId()).orElseThrow(
-                ()->new ResourceNotFoundException("Branch","id", productRequest.getBranchId())
-        );
         Product product = new Product();
         product.setName(productRequest.getName());
         product.setQuantity(productRequest.getQuantity());
         product.setDescription(productRequest.getDescription());
-        product.setBranch(branch);
+        product.setPrice(productRequest.getPrice());
         Product savePro = productRepository.save(product);
         ProductDto productDto1 = modelMapper.map(savePro, ProductDto.class);
         return productDto1;
@@ -76,14 +81,11 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(productId).orElseThrow(
                 ()->new ResourceNotFoundException("Product","id",productId)
         );
-        Branch branch = branchRepository.findById(productRequest.getBranchId()).orElseThrow(
-                ()->new ResourceNotFoundException("Branch","id", productRequest.getBranchId())
-        );
+
         product.setName(productRequest.getName());
         product.setQuantity(productRequest.getQuantity());
         product.setDescription(productRequest.getDescription());
-        product.setBranch(branch);
-
+        product.setPrice(productRequest.getPrice());
         Product savePro = productRepository.save(product);
         return modelMapper.map(savePro, ProductDto.class);
     }

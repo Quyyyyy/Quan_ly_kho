@@ -1,7 +1,9 @@
 package com.example.quan_ly_kho.service.Impl;
 
+import com.example.quan_ly_kho.dto.ProductDto;
 import com.example.quan_ly_kho.dto.ProviderDto;
 import com.example.quan_ly_kho.dto.ResultResponse;
+import com.example.quan_ly_kho.entity.Product;
 import com.example.quan_ly_kho.entity.Provider;
 import com.example.quan_ly_kho.exception.ResourceNotFoundException;
 import com.example.quan_ly_kho.repository.ProviderRepository;
@@ -22,6 +24,14 @@ import java.util.stream.Collectors;
 public class ProviderServiceImpl implements ProviderService {
     private ProviderRepository providerRepository;
     private ModelMapper modelMapper;
+
+    @Override
+    public List<ProviderDto> getProviders() {
+        List<Provider> providers = providerRepository.findAll();
+        List<ProviderDto> providerDtos = providers.stream().map((provider)->modelMapper.map(provider, ProviderDto.class))
+                .collect(Collectors.toList());
+        return providerDtos;
+    }
 
     @Override
     public ResultResponse getAllProvider(int pageNo, int pageSize, String sortBy, String sortDir) {

@@ -1,20 +1,26 @@
 package com.example.quan_ly_kho.controller;
 
 import com.example.quan_ly_kho.dto.CustomerDto;
-import com.example.quan_ly_kho.dto.ProviderDto;
 import com.example.quan_ly_kho.dto.ResultResponse;
 import com.example.quan_ly_kho.service.CustomerService;
-import com.example.quan_ly_kho.service.ProviderService;
 import com.example.quan_ly_kho.utils.AppConstants;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user/customer")
 public class CustomerController {
     private CustomerService customerService;
+
+    @GetMapping("/all")
+    public ResponseEntity<List<CustomerDto>> getCustomers(){
+        List<CustomerDto> dtoList = customerService.getCustomerss();
+        return ResponseEntity.ok(dtoList);
+    }
 
     @GetMapping
     public ResultResponse getAllCustomers(

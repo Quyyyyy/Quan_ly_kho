@@ -16,10 +16,10 @@ public class UserRequest {
     private Long id;
     private String name;
     private String phone;
-    private Date bornDate;
+//    private Date bornDate;
     private String username;
     private String password;
     private String address;
-    private Role role;
+    private String role;
     private Long ChiNhanh_id;
 }

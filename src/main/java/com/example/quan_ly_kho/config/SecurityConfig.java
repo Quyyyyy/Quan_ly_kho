@@ -31,7 +31,7 @@ public class SecurityConfig {
         http.csrf((csrf)->csrf.disable())
                 .authorizeHttpRequests((authorize)->{
                     authorize.requestMatchers("/auth/**").permitAll();
-                    authorize.requestMatchers("/user/**").hasAuthority("USER");
+//                    authorize.requestMatchers("/user/**").hasAuthority("USER");
                     authorize.requestMatchers("/admin/**").hasAuthority("ADMIN");
                     authorize.anyRequest().authenticated();
                 }).exceptionHandling((exception)->{

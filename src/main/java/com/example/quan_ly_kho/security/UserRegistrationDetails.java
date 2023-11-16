@@ -22,7 +22,7 @@ public class UserRegistrationDetails implements UserDetails {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.isEnabled = user.getStatus();
-        this.authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+        this.authorities = List.of(new SimpleGrantedAuthority( user.getRole().name()));
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

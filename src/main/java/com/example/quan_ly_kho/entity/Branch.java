@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "[Kho]", schema = "[dbo]")
+@Table(name = "[ChiNhanh]", schema = "[dbo]")
 public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

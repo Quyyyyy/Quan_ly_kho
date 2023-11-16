@@ -5,16 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImportReceiptRequest {
+public class ExportReceiptDetailRequest {
     private Long id;
-    private Date importDate;
-    private String description;
-    private Long providerId;
-//    private List<ImportReceiptDetailRequest> list;
+    private Long productId;
+    private Long quantity;
+    private Double price;
 }

@@ -9,14 +9,22 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
-@RequestMapping("/admin/product")
+@RequestMapping("/user/product")
 public class ProductController {
     private ProductService productService;
 
+    @GetMapping("/all")
+    public ResponseEntity<List<ProductDto>> getProducts() {
+        List<ProductDto> productDtos = productService.getProducts();
+        return ResponseEntity.ok(productDtos);
+    }
+
     @GetMapping
-    public ResultResponse getAllProducts(
+    public ResultResponse getAllProductsyPage(
             @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
             @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
             @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
