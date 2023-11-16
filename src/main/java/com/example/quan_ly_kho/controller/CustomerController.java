@@ -23,13 +23,14 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResultResponse getAllCustomers(
+    public ResponseEntity<ResultResponse> getAllCustomers(
             @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
             @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
             @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
             @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
     ){
-        return customerService.getAllCustomer(pageNo,pageSize,sortBy,sortDir);
+        ResultResponse rs = customerService.getAllCustomer(pageNo,pageSize,sortBy,sortDir);
+        return ResponseEntity.ok(rs);
     }
 
     @PostMapping

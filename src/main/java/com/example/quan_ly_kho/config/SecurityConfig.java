@@ -29,6 +29,7 @@ public class SecurityConfig {
     @Bean
      SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf)->csrf.disable())
+                .csrf((cors)->cors.disable())
                 .authorizeHttpRequests((authorize)->{
                     authorize.requestMatchers("/auth/**").permitAll();
 //                    authorize.requestMatchers("/user/**").hasAuthority("USER");
