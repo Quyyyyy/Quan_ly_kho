@@ -1,0 +1,1039 @@
+{
+	"info": {
+		"_postman_id": "69fab806-fe3d-44b8-b588-7abd542c443e",
+		"name": "Quan_ly_kho",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23900753",
+		"_collection_link": "https://warped-station-163708.postman.co/workspace/New-Team-Workspace~2cde8253-4174-4eb6-b72d-a58b8c52127b/collection/23900753-69fab806-fe3d-44b8-b588-7abd542c443e?action=share&source=collection_link&creator=23900753"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Trần Vũ Minh Quý\",\r\n    \"username\":\"QUYTVM\",\r\n    \"password\":\"12345678\",\r\n    \"phone\":\"0342939269\",\r\n    \"address\":\"Hà Đông, Hà Nội\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"QUYTVM\",\r\n    \"password\":\"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProductByPage",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAwNzY4MjgsImV4cCI6MTcwMDY4MTYyOH0.e91o3bsMKfSoAACdkUVFBtnukOzvwz8oKYWNXX1u1kWzzkDXaKv6ZJUGExgdvjPI"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/product?pageNo=0&pageSize=2&sortBy=id&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"product"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAwNzY4MjgsImV4cCI6MTcwMDY4MTYyOH0.e91o3bsMKfSoAACdkUVFBtnukOzvwz8oKYWNXX1u1kWzzkDXaKv6ZJUGExgdvjPI"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Vật tư 6\",\r\n    \"quantity\":250,\r\n    \"description\":\"vật tư kho\",\r\n    \"price\":100.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/user/product/6"
+			},
+			"response": []
+		},
+		{
+			"name": "AddProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAwNzY4MjgsImV4cCI6MTcwMDY4MTYyOH0.e91o3bsMKfSoAACdkUVFBtnukOzvwz8oKYWNXX1u1kWzzkDXaKv6ZJUGExgdvjPI"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Vật tư 6\",\r\n    \"quantity\":250,\r\n    \"description\":\"vật tư kho\",\r\n    \"price\":120.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/user/product"
+			},
+			"response": []
+		},
+		{
+			"name": "getProductById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAwODAwOTMsImV4cCI6MTcwMDY4NDg5M30.dTCeY2e4hsVki_5v66aOmUkjK3Rns894aEPYcYAAHOwERONLrR_RN2cYTvz_hjZF"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/user/product/1"
+			},
+			"response": []
+		},
+		{
+			"name": "getProducts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAwODMwMDEsImV4cCI6MTcwMDY4NzgwMX0.hEVkJ1Hp39I7s3ypQx8lUGum-ld8CiUIGMemEbHa8P_snaaDYp3bMu0PWoO4V0n7"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/user/product/all"
+			},
+			"response": []
+		},
+		{
+			"name": "AddCustomer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjI2NzAsImV4cCI6MTcwMDcyNzQ3MH0.4H08xudJZvBraNq3csdFh2SRhbM8flAukC8gdjRKGh1JlLcgkrUDxTg2dmW1D5b8"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Công ty TNHH A\",\r\n    \"phone\":\"03333333333\",\r\n    \"email\":\"tnhha@Gmail.com\",\r\n    \"address\":\"Thạch Thất, Hà Nội\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/user/customer"
+			},
+			"response": []
+		},
+		{
+			"name": "EditCustomer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjI2NzAsImV4cCI6MTcwMDcyNzQ3MH0.4H08xudJZvBraNq3csdFh2SRhbM8flAukC8gdjRKGh1JlLcgkrUDxTg2dmW1D5b8"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Công ty TNHH A\",\r\n    \"phone\":\"0917355465\",\r\n    \"email\":\"tnhha@Gmail.com\",\r\n    \"address\":\"Thạch Thất, Hà Nội\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/user/customer/1"
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomerById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjI2NzAsImV4cCI6MTcwMDcyNzQ3MH0.4H08xudJZvBraNq3csdFh2SRhbM8flAukC8gdjRKGh1JlLcgkrUDxTg2dmW1D5b8"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/user/customer/1"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCustomerByPage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjI2NzAsImV4cCI6MTcwMDcyNzQ3MH0.4H08xudJZvBraNq3csdFh2SRhbM8flAukC8gdjRKGh1JlLcgkrUDxTg2dmW1D5b8"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/customer?pageNo=0&pageSize=3&sortBy=id&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"customer"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "3"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomerss",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjI2NzAsImV4cCI6MTcwMDcyNzQ3MH0.4H08xudJZvBraNq3csdFh2SRhbM8flAukC8gdjRKGh1JlLcgkrUDxTg2dmW1D5b8"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/user/customer/all"
+			},
+			"response": []
+		},
+		{
+			"name": "addProvider",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Nhà cung cấp A\",\r\n    \"phone\":\"0344723413\",\r\n    \"email\":\"nca@gmail.com\",\r\n    \"address\":\"Quế Võ, Bắc Ninh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/admin/provider"
+			},
+			"response": []
+		},
+		{
+			"name": "editProvider",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Nhà cung cấp B\",\r\n    \"phone\":\"0345725415\",\r\n    \"email\":\"ncb@gmail.com\",\r\n    \"address\":\"Quế Võ, Bắc Ninh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/admin/provider/2"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProviderByPage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/provider?pageNo=0&pageSize=1&sortBy=id&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"provider"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "1"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProviderByid",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/admin/provider/2"
+			},
+			"response": []
+		},
+		{
+			"name": "getProviderss",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/admin/provider/all"
+			},
+			"response": []
+		},
+		{
+			"name": "getBrannches",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/admin/branch/all"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllBranchByPage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/branch?pageNo=0&pageSize=10&sortBy=id&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"branch"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Chi nhánh 12\",\r\n    \"phone\":\"0123456780\",\r\n    \"email\":\"cn12@Gmail.com\",\r\n    \"address\":\"quận 1, Hồ Chí Minh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/admin/branch"
+			},
+			"response": []
+		},
+		{
+			"name": "editBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Chi nhánh 12\",\r\n    \"phone\":\"0366788991\",\r\n    \"email\":\"cn12@Gmail.com\",\r\n    \"address\":\"quận 1, Hồ Chí Minh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/admin/branch/12"
+			},
+			"response": []
+		},
+		{
+			"name": "getBranchById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxMjU5MjQsImV4cCI6MTcwMDczMDcyNH0.7tMyKDTuupUGtntZfh9lriJn-FKQHtRBukUcLtFGbTr6oJ_RqZED8QTHgfn7Lk9j"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/admin/branch/12"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUsersByPage",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDE1MTcsImV4cCI6MTcwMDc0NjMxN30.c7kMyaXa8dJMODkVDUXArvFw2XY1xZhfEjbQ13WBFL2s1nEOMjyVK87Nk-oRGmbO"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/users?pageNo=0&pageSize=3&sortBy=id&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "3"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/admin/users/1"
+			},
+			"response": []
+		},
+		{
+			"name": "activeUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/admin/users/1"
+			},
+			"response": []
+		},
+		{
+			"name": "getUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/admin/users/1"
+			},
+			"response": []
+		},
+		{
+			"name": "addUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": \"NGuyễn Quang Hải\",\r\n  \"phone\": \"123456789\",\r\n  \"username\": \"HAINQ\",\r\n  \"password\": \"12345678\",\r\n  \"address\": \"Hà Nội\",\r\n  \"role\":\"ADMIN\",\r\n   \"branchId\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/admin/users"
+			},
+			"response": []
+		},
+		{
+			"name": "editUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"John Doe\",\r\n    \"phone\": \"123456789\",\r\n    \"username\": \"john.doe\",\r\n    \"address\": \"123 Main Street\",\r\n    \"role\":\"USER\",\r\n    \"branchId\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/admin/users/4"
+			},
+			"response": []
+		},
+		{
+			"name": "CreateImport",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"phiếu nhập 1\",\r\n    \"providerId\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/user/import"
+			},
+			"response": []
+		},
+		{
+			"name": "addProductToImport",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":1,\r\n    \"productId\":1,\r\n    \"quantity\":300,\r\n    \"price\":23.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/user/import/1"
+			},
+			"response": []
+		},
+		{
+			"name": "createExport",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"phiếu xuất kho lần 1\",\r\n    \"customerId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/user/export"
+			},
+			"response": []
+		},
+		{
+			"name": "addProductToExport",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"id\":1,\r\n    \"productId\":1,\r\n    \"quantity\":100,\r\n    \"price\":25.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/user/export/1"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllImportReceiptByPage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/user/import"
+			},
+			"response": []
+		},
+		{
+			"name": "getDetailImportReceipt",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/user/import/1"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllExportReceiptByPage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/user/export"
+			},
+			"response": []
+		},
+		{
+			"name": "getDetailExportExceipt",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/user/export/1"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProductBranchByBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/productbranch/1?pageNo=0&pageSize=2&sortBy=id&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"productbranch",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUserByBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/users/branch/1?pageNo=1&pageSize=1&sortBy=id&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users",
+						"branch",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "1"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getImportReceiptByBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxOTIyNjcsImV4cCI6MTcwMDc5NzA2N30.ODmthzxI4VyzVv1EcGc470AtwyfeFk80DOxYZGMlSNNvroQSkteHw_SpKxOfoWst"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/import/branch/1?pageNo=0&pageSize=2&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"import",
+						"branch",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getExportReceiptByBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxOTIyNjcsImV4cCI6MTcwMDc5NzA2N30.ODmthzxI4VyzVv1EcGc470AtwyfeFk80DOxYZGMlSNNvroQSkteHw_SpKxOfoWst"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/export/branch/1?pageNo=0&pageSize=2&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"export",
+						"branch",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

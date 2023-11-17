@@ -1422,13 +1422,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/branch/1?pageNo=0&pageSize=1&sortBy=id&sortDir=desc",
+					"raw": "http://localhost:8080/admin/users/branch/1?pageNo=1&pageSize=1&sortBy=id&sortDir=desc",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"admin",
 						"users",
 						"branch",
 						"1"
@@ -1436,7 +1437,7 @@
 					"query": [
 						{
 							"key": "pageNo",
-							"value": "0"
+							"value": "1"
 						},
 						{
 							"key": "pageSize",

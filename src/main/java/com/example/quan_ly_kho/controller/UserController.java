@@ -56,7 +56,7 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
-    @GetMapping("/users/branch/{branchId}")
+    @GetMapping("/admin/users/branch/{branchId}")
     public ResponseEntity<ResultResponse> getAllUsersByBranch(
             @PathVariable("branchId") Long id,
             @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
