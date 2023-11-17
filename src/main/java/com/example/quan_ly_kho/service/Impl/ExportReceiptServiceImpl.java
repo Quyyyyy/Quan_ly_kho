@@ -1,9 +1,6 @@
 package com.example.quan_ly_kho.service.Impl;
 
-import com.example.quan_ly_kho.dto.ExportReceiptDetailDto;
-import com.example.quan_ly_kho.dto.ExportReceiptDto;
-import com.example.quan_ly_kho.dto.ProductDto;
-import com.example.quan_ly_kho.dto.ResultResponse;
+import com.example.quan_ly_kho.dto.*;
 import com.example.quan_ly_kho.dto.request.ExportReceiptDetailRequest;
 import com.example.quan_ly_kho.dto.request.ExportReceiptRequest;
 import com.example.quan_ly_kho.entity.*;
@@ -121,5 +118,23 @@ public class ExportReceiptServiceImpl implements ExportReceiptService {
 
         ExportReceiptDetail receiptDetail = receiptDetailRepository.save(exportDetail);
         return modelMapper.map(receiptDetail, ExportReceiptDetailDto.class);
+    }
+
+    @Override
+    public ResultResponse getExportReceiptsByBranch(Long branchId, int pageNo, int pageSize, String sortDir) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<ExportReceipt> exportReceipts = exportReceiptRepository.findBranchId(branchId,sortDir,pageable);
+        List<ExportReceipt> exportReceiptList = exportReceipts.getContent();
+        List<ExportReceiptDto> contents = exportReceiptList.stream()
+                .map(ex -> modelMapper.map(ex,ExportReceiptDto.class)).collect(Collectors.toList());
+
+        ResultResponse resultResponse = new ResultResponse();
+        resultResponse.setContent(contents);
+        resultResponse.setPageNo(exportReceipts.getNumber());
+        resultResponse.setPageSize(exportReceipts.getSize());
+        resultResponse.setTotalElements(exportReceipts.getTotalElements());
+        resultResponse.setTotalPages(exportReceipts.getTotalPages());
+        resultResponse.setLast(exportReceipts.isLast());
+        return resultResponse;
     }
 }

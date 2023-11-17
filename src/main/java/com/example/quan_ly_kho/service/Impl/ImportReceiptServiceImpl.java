@@ -123,4 +123,22 @@ public class ImportReceiptServiceImpl implements ImportReceiptService {
         ImportReceiptDetail receiptDetail = receiptDetailRepository.save(importDetail);
         return modelMapper.map(receiptDetail, ImportReceiptDetailDto.class);
     }
+
+    @Override
+    public ResultResponse getImportReceiptsByBranch(Long branchId, int pageNo, int pageSize, String sortDir) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<ImportReceipt> importReceipts = importReceiptRepository.findByBranchId(branchId,sortDir,pageable);
+        List<ImportReceipt> importReceiptList = importReceipts.getContent();
+        List<ImportReceiptDto> contents = importReceiptList.stream()
+                .map(ex -> modelMapper.map(ex,ImportReceiptDto.class)).collect(Collectors.toList());
+
+        ResultResponse resultResponse = new ResultResponse();
+        resultResponse.setContent(contents);
+        resultResponse.setPageNo(importReceipts.getNumber());
+        resultResponse.setPageSize(importReceipts.getSize());
+        resultResponse.setTotalElements(importReceipts.getTotalElements());
+        resultResponse.setTotalPages(importReceipts.getTotalPages());
+        resultResponse.setLast(importReceipts.isLast());
+        return resultResponse;
+    }
 }

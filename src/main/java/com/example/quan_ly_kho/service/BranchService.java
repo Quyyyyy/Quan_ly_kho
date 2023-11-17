@@ -11,4 +11,5 @@ public interface BranchService {
     BranchDto createBranch(BranchDto branchDto);
     BranchDto getBranchById(Long branchId);
     BranchDto updateBranch(Long branchId,BranchDto branchDto);
+    ResultResponse getProductByBranch(Long branchId,int pageNo, int pageSize, String sortBy, String sortDir);
 }

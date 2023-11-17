@@ -1,6 +1,5 @@
 package com.example.quan_ly_kho.controller;
 
-import com.example.quan_ly_kho.dto.BranchDto;
 import com.example.quan_ly_kho.dto.ExportReceiptDetailDto;
 import com.example.quan_ly_kho.dto.ExportReceiptDto;
 import com.example.quan_ly_kho.dto.ResultResponse;
@@ -14,8 +13,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user/export")
@@ -24,7 +21,7 @@ public class ExportReceiptController {
     private JwtTokenProvider jwtTokenProvider;
 
     @GetMapping
-    public ResponseEntity<ResultResponse> getAllBranches(
+    public ResponseEntity<ResultResponse> getAllImportReceipts(
             @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
             @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
             @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
@@ -35,7 +32,7 @@ public class ExportReceiptController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ExportReceiptDto> getBranches(@PathVariable("id") Long id){
+    public ResponseEntity<ExportReceiptDto> getExportReceiptById(@PathVariable("id") Long id){
         ExportReceiptDto exportReceiptDto = exportReceiptService.getExportReceiptById(id);
         return ResponseEntity.ok(exportReceiptDto);
     }
@@ -60,5 +57,16 @@ public class ExportReceiptController {
         ExportReceiptDetailDto exportReceiptDetailDto =
                 exportReceiptService.createExportReceiptDetai(username, importReceiptId,exportReceiptRequest);
         return ResponseEntity.ok(exportReceiptDetailDto);
+    }
+
+    @GetMapping("/branch/{id}")
+    public ResponseEntity<ResultResponse> getAllExportReceiptByBranches(
+            @PathVariable("id") Long id,
+            @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
+            @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
+            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
+    ){
+        ResultResponse rs = exportReceiptService.getExportReceiptsByBranch(id,pageNo,pageSize,sortDir);
+        return ResponseEntity.ok(rs);
     }
 }

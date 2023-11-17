@@ -162,4 +162,27 @@ public class UserServiceImpl implements UserService {
         );
         return modelMapper.map(user, UserDto.class);
     }
+
+    @Override
+    public ResultResponse getUsersByBranch(Long branchId, int pageNo, int pageSize, String sortBy, String sortDir) {
+        Branch branch = branchRepository.findById(branchId).orElseThrow(
+                ()->new ResourceNotFoundException("Branch","id", branchId)
+        );
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(pageNo,pageSize,sort);
+        Page<User> users = userRepository.findUserByBranch(branch,pageable);
+        List<User> listOUser = users.getContent();
+        List<UserDto> contents = listOUser.stream()
+                .map(user -> modelMapper.map(user, UserDto.class)).collect(Collectors.toList());
+
+        ResultResponse resultResponse = new ResultResponse();
+        resultResponse.setContent(contents);
+        resultResponse.setPageNo(users.getNumber());
+        resultResponse.setPageSize(users.getSize());
+        resultResponse.setTotalElements(users.getTotalElements());
+        resultResponse.setTotalPages(users.getTotalPages());
+        resultResponse.setLast(users.isLast());
+        return resultResponse;
+    }
 }

@@ -17,4 +17,5 @@ public interface UserService {
     UserDto deleteUser(Long id);
     UserDto activeUser(Long id);
     UserDto getUserById(Long id);
+    ResultResponse getUsersByBranch(Long branchId,int pageNo, int pageSize, String sortBy, String sortDir);
 }

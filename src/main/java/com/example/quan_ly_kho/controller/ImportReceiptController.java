@@ -1,6 +1,5 @@
 package com.example.quan_ly_kho.controller;
 
-import com.example.quan_ly_kho.dto.ExportReceiptDto;
 import com.example.quan_ly_kho.dto.ImportReceiptDetailDto;
 import com.example.quan_ly_kho.dto.ImportReceiptDto;
 import com.example.quan_ly_kho.dto.ResultResponse;
@@ -22,7 +21,7 @@ public class ImportReceiptController {
     private JwtTokenProvider jwtTokenProvider;
 
     @GetMapping
-    public ResponseEntity<ResultResponse> getAllBranches(
+    public ResponseEntity<ResultResponse> getAllImportReceipts(
             @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
             @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
             @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
@@ -33,7 +32,7 @@ public class ImportReceiptController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ImportReceiptDto> getBranches(@PathVariable("id") Long id){
+    public ResponseEntity<ImportReceiptDto> getImportReceiptById(@PathVariable("id") Long id){
         ImportReceiptDto importReceiptDto = importReceiptService.getImportReceiptById(id);
         return ResponseEntity.ok(importReceiptDto);
     }
@@ -59,5 +58,16 @@ public class ImportReceiptController {
         ImportReceiptDetailDto importReceiptDetailDto =
                 importReceiptService.createImportReceiptDetai(username, importReceiptId,importReceiptRequest);
         return ResponseEntity.ok(importReceiptDetailDto);
+    }
+
+    @GetMapping("/branch/{id}")
+    public ResponseEntity<ResultResponse> getAllImportReceiptByBranches(
+            @PathVariable("id") Long id,
+            @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
+            @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
+            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
+    ){
+        ResultResponse rs = importReceiptService.getImportReceiptsByBranch(id,pageNo,pageSize,sortDir);
+        return ResponseEntity.ok(rs);
     }
 }

@@ -1,10 +1,13 @@
 package com.example.quan_ly_kho.service.Impl;
 
 import com.example.quan_ly_kho.dto.BranchDto;
+import com.example.quan_ly_kho.dto.ProductBranchDto;
 import com.example.quan_ly_kho.dto.ResultResponse;
 import com.example.quan_ly_kho.entity.Branch;
+import com.example.quan_ly_kho.entity.ProductBranch;
 import com.example.quan_ly_kho.exception.ResourceNotFoundException;
 import com.example.quan_ly_kho.repository.BranchRepository;
+import com.example.quan_ly_kho.repository.ProductBranchRepository;
 import com.example.quan_ly_kho.service.BranchService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,6 +24,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BranchServiceImpl implements BranchService {
     private BranchRepository branchRepository;
+    private ProductBranchRepository productBranchRepository;
     private ModelMapper modelMapper;
 
     @Override
@@ -79,5 +83,29 @@ public class BranchServiceImpl implements BranchService {
         branch.setPhone(branch.getPhone());
         Branch saveBranch = branchRepository.save(branch);
         return modelMapper.map(saveBranch,BranchDto.class);
+    }
+
+    @Override
+    public ResultResponse getProductByBranch(Long branchId, int pageNo, int pageSize, String sortBy, String sortDir) {
+        Branch branch = branchRepository.findById(branchId).orElseThrow(
+                ()->new ResourceNotFoundException("Branch","id",branchId)
+        );
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(pageNo,pageSize,sort);
+        Page<ProductBranch> productBranches = productBranchRepository.findByBranch(branch,pageable);
+        List<ProductBranch> productBranchList = productBranches.getContent();
+
+        List<ProductBranchDto> contents = productBranchList.stream()
+                .map(pb -> modelMapper.map(pb,ProductBranchDto.class)).collect(Collectors.toList());
+
+        ResultResponse resultResponse = new ResultResponse();
+        resultResponse.setContent(contents);
+        resultResponse.setPageNo(productBranches.getNumber());
+        resultResponse.setPageSize(productBranches.getSize());
+        resultResponse.setTotalElements(productBranches.getTotalElements());
+        resultResponse.setTotalPages(productBranches.getTotalPages());
+        resultResponse.setLast(productBranches.isLast());
+        return resultResponse;
     }
 }

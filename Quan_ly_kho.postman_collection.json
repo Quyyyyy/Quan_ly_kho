@@ -873,7 +873,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/admin/users",
+					"raw": "http://localhost:8080/admin/users?pageNo=0&pageSize=3&sortBy=id&sortDir=desc",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -882,6 +882,24 @@
 					"path": [
 						"admin",
 						"users"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "3"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
 					]
 				}
 			},
@@ -1334,6 +1352,196 @@
 						"user",
 						"export",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProductBranchByBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/productbranch/1?pageNo=0&pageSize=2&sortBy=id&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"productbranch",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUserByBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxNDQzNzYsImV4cCI6MTcwMDc0OTE3Nn0.sCvj0_y0d4eh9yNSc3tWWHOsBmgoF35SFcHxsDavu0rcF8gk8U9fsFfLtxsMipoP",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/branch/1?pageNo=0&pageSize=1&sortBy=id&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"branch",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "1"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getImportReceiptByBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxOTIyNjcsImV4cCI6MTcwMDc5NzA2N30.ODmthzxI4VyzVv1EcGc470AtwyfeFk80DOxYZGMlSNNvroQSkteHw_SpKxOfoWst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/import/branch/1?pageNo=0&pageSize=2&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"import",
+						"branch",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getExportReceiptByBranch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJRVVlUVk0iLCJpYXQiOjE3MDAxOTIyNjcsImV4cCI6MTcwMDc5NzA2N30.ODmthzxI4VyzVv1EcGc470AtwyfeFk80DOxYZGMlSNNvroQSkteHw_SpKxOfoWst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/export/branch/1?pageNo=0&pageSize=2&sortDir=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"export",
+						"branch",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						}
 					]
 				}
 			},

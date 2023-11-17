@@ -12,4 +12,5 @@ public interface ImportReceiptService {
     ImportReceiptDto getImportReceiptById(Long id);
     ImportReceiptDto createImportReceipt(String username,ImportReceiptRequest importReceiptRequest);
     ImportReceiptDetailDto createImportReceiptDetai(String username,Long importReceiptId, ImportReceiptDetailRequest importReceiptDetailRequest);
+    ResultResponse getImportReceiptsByBranch(Long branchId,int pageNo, int pageSize, String sortDir);
 }

@@ -11,4 +11,5 @@ public interface ExportReceiptService {
     ExportReceiptDto getExportReceiptById(Long id);
     ExportReceiptDto createExportReceipt(String username, ExportReceiptRequest exportReceiptRequest);
     ExportReceiptDetailDto createExportReceiptDetai(String username, Long exportReceiptId, ExportReceiptDetailRequest exportReceiptDetailRequest);
+    ResultResponse getExportReceiptsByBranch(Long branchId,int pageNo, int pageSize, String sortDir);
 }
