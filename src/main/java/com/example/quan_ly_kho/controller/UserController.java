@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class UserController {
     private UserService userService;
-
+//    @Value("app.branchId")
+//    private Long branchId;
     @GetMapping("/admin/users")
     public ResponseEntity<ResultResponse> getAllUsersByPage(
             @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
@@ -22,7 +23,7 @@ public class UserController {
             @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
             @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
     ){
-        return ResponseEntity.ok(userService.getAllUser(pageNo, pageSize, sortBy, sortDir));
+        return ResponseEntity.ok(userService.getUsersByBranch(AppConstants.DEFAULT_BRANCH_ID,pageNo, pageSize, sortBy, sortDir));
     }
 
     @PostMapping("/admin/users")
@@ -56,14 +57,14 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
-    @GetMapping("/users/branch/{branchId}")
-    public ResponseEntity<ResultResponse> getAllUsersByBranch(
-            @PathVariable("branchId") Long id,
-            @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
-            @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
-            @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
-            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
-    ){
-        return ResponseEntity.ok(userService.getUsersByBranch(id,pageNo, pageSize, sortBy, sortDir));
-    }
+//    @GetMapping("/users/branch/{branchId}")
+//    public ResponseEntity<ResultResponse> getAllUsersByBranch(
+//            @PathVariable("branchId") Long id,
+//            @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
+//            @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
+//            @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
+//            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
+//    ){
+//        return ResponseEntity.ok(userService.getUsersByBranch(id,pageNo, pageSize, sortBy, sortDir));
+//    }
 }

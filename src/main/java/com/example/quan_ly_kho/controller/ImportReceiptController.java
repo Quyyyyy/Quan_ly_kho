@@ -19,15 +19,16 @@ import org.springframework.web.bind.annotation.*;
 public class ImportReceiptController {
     private ImportReceiptService importReceiptService;
     private JwtTokenProvider jwtTokenProvider;
+//    @Value("app.branchId")
+//    private Long branchId;
 
     @GetMapping
     public ResponseEntity<ResultResponse> getAllImportReceipts(
             @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
             @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
-            @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
             @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
     ){
-        ResultResponse rs = importReceiptService.getAllImportReceipts(pageNo,pageSize,sortBy,sortDir);
+        ResultResponse rs = importReceiptService.getImportReceiptsByBranch(AppConstants.DEFAULT_BRANCH_ID,pageNo,pageSize,sortDir);
         return ResponseEntity.ok(rs);
     }
 
@@ -60,14 +61,14 @@ public class ImportReceiptController {
         return ResponseEntity.ok(importReceiptDetailDto);
     }
 
-    @GetMapping("/branch/{id}")
-    public ResponseEntity<ResultResponse> getAllImportReceiptByBranches(
-            @PathVariable("id") Long id,
-            @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
-            @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
-            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
-    ){
-        ResultResponse rs = importReceiptService.getImportReceiptsByBranch(id,pageNo,pageSize,sortDir);
-        return ResponseEntity.ok(rs);
-    }
+//    @GetMapping("/branch/{id}")
+//    public ResponseEntity<ResultResponse> getAllImportReceiptByBranches(
+//            @PathVariable("id") Long id,
+//            @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
+//            @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
+//            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
+//    ){
+//        ResultResponse rs = importReceiptService.getImportReceiptsByBranch(id,pageNo,pageSize,sortDir);
+//        return ResponseEntity.ok(rs);
+//    }
 }

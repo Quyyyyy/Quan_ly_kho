@@ -10,6 +10,7 @@ import com.example.quan_ly_kho.service.ExportReceiptService;
 import com.example.quan_ly_kho.utils.AppConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,15 +20,16 @@ import org.springframework.web.bind.annotation.*;
 public class ExportReceiptController {
     private ExportReceiptService exportReceiptService;
     private JwtTokenProvider jwtTokenProvider;
+//    @Value("app.branchId")
+//    private static Long branchId;
 
     @GetMapping
     public ResponseEntity<ResultResponse> getAllImportReceipts(
             @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
             @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
-            @RequestParam(value="sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false) String sortBy,
             @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
     ){
-        ResultResponse rs = exportReceiptService.getAllExportReceipts(pageNo,pageSize,sortBy,sortDir);
+        ResultResponse rs = exportReceiptService.getExportReceiptsByBranch(AppConstants.DEFAULT_BRANCH_ID,pageNo,pageSize,sortDir);
         return ResponseEntity.ok(rs);
     }
 
@@ -59,14 +61,14 @@ public class ExportReceiptController {
         return ResponseEntity.ok(exportReceiptDetailDto);
     }
 
-    @GetMapping("/branch/{id}")
-    public ResponseEntity<ResultResponse> getAllExportReceiptByBranches(
-            @PathVariable("id") Long id,
-            @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
-            @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
-            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
-    ){
-        ResultResponse rs = exportReceiptService.getExportReceiptsByBranch(id,pageNo,pageSize,sortDir);
-        return ResponseEntity.ok(rs);
-    }
+//    @GetMapping("/branch/{id}")
+//    public ResponseEntity<ResultResponse> getAllExportReceiptByBranches(
+//            @PathVariable("id") Long id,
+//            @RequestParam(value="pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
+//            @RequestParam(value="pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false) int pageSize,
+//            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
+//    ){
+//        ResultResponse rs = exportReceiptService.getExportReceiptsByBranch(id,pageNo,pageSize,sortDir);
+//        return ResponseEntity.ok(rs);
+//    }
 }
